@@ -1,4 +1,4 @@
-package Bai2;
+package bai5;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -11,7 +11,7 @@ public class client {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			Socket client = new Socket("LocalHost", 7777);
+			Socket client = new Socket("LocalHost", 7787);
 			System.out.println("Client da duoc tao");
 			Scanner inFromServer = new Scanner(client.getInputStream());
 			PrintStream outToServer = new PrintStream(client.getOutputStream());

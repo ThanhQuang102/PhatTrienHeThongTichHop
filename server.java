@@ -1,4 +1,4 @@
-package Bai2;
+package bai5;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class server {
 	public static void main(String[] args) {
 		try {
-			ServerSocket server = new ServerSocket(7777);
+			ServerSocket server = new ServerSocket(7787);
 			System.out.println("Server da duoc tao");
 			Socket client = server.accept();
 			System.out.println("Client da ket noi den server");
