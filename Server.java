@@ -1,55 +1,49 @@
-package bai1;
+package Bai2;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Server {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			ServerSocket server = new ServerSocket(1100);
+			ServerSocket server = new ServerSocket(1022);
 			System.out.println("Server da duoc tao");
-			Socket client = server.accept();
+			Socket socket =server.accept();
 			System.out.println("Client da ket noi den server");
-			Scanner inFromClient = new Scanner(client.getInputStream());
-			PrintStream outToClient = new PrintStream(client.getOutputStream());
-			outToClient.println("nhap ten sach");
-			String num = inFromClient.nextLine();
-			System.out.println("client: " +num);
+
+			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+
+			DataInputStream in = new DataInputStream(socket.getInputStream());
 			
-			switch (num)
-			{
-				case "0": outToClient.println("Khong");
+			Scanner input = new Scanner(System.in);
+			while(true) {
+
+				String str =in.readUTF();
+				if(str.equalsIgnoreCase("bye")) {	
 					break;
-				case "1": outToClient.println("mot");
-				break;
-				case "2": outToClient.println("hai");
-				break;
-				case "3": outToClient.println("ba");
-				break;
-				case "4": outToClient.println("bon");
-				break;
-				case "5": outToClient.println("nam");
-				break;
-				case "6": outToClient.println("sau");
-				break;
-				case "7": outToClient.println("bay");
-				break;
-				case "8": outToClient.println("tam");
-				break;
-				case "9": outToClient.println("chin");
-				break;
+				}else {
+					System.out.println("Client: " + str);
+				}
+
+				System.out.println("\n");
+				out.writeUTF(input.nextLine());
+				out.flush();
 			}
-			
-			}
-			catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
+			System.out.println("Cuoc tro chuyen ket thuc");
+			input.close();
+			in.close();
+			out.close();
+			socket.close();
+			server.close();
+		} catch (IOException e) {
+			System.out.println("Cuoc tro chuyen ket thuc");
+		}
 
 	}
 }
-
